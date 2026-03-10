@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>دليل صيدليات تيزنيت</title>
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+background:#f2f2f2;
+direction:rtl;
+}
+
+header{
+background:#0a7f5a;
+color:white;
+text-align:center;
+padding:20px;
+font-size:24px;
+font-weight:bold;
+}
+
+.search-box{
+padding:15px;
+text-align:center;
+background:white;
+}
+
+.search-box input{
+width:90%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+.container{
+padding:10px;
+}
+
+.pharmacy{
+background:white;
+padding:15px;
+margin:10px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+
+.name{
+font-size:20px;
+color:#0a7f5a;
+font-weight:bold;
+}
+
+.address{
+margin-top:6px;
+color:#555;
+}
+
+.phone{
+margin-top:6px;
+color:#333;
+}
+
+.buttons{
+margin-top:10px;
+}
+
+button{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+margin-left:5px;
+font-size:14px;
+cursor:pointer;
+}
+
+.call{
+background:#0a7f5a;
+color:white;
+}
+
+.map{
+background:#0077ff;
+color:white;
+}
+
+footer{
+text-align:center;
+padding:15px;
+font-size:14px;
+color:#666;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+📍 دليل صيدليات تيزنيت
+</header>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="ابحث عن صيدلية...">
+</div>
+
+<div class="container" id="pharmacyList"></div>
+
+<footer>
+تطبيق دليل الصيدليات - مدينة تيزنيت
+</footer>
+
+<script>
+
+const pharmacies = [
+
+{
+name:"Pharmacie El Fath",
+address:"Lot El Fath 01 - قرب مسجد الفتح",
+phone:"0528863442",
+map:"https://www.google.com/maps/search/?api=1&query=Pharmacie+El+Fath+Tiznit"
+},
+
+{
+name:"Pharmacie Abouzaid",
+address:"طريق أكلو قرب مستشفى الحسن الأول",
+phone:"0528601500",
+map:"https://www.google.com/maps/search/?api=1&query=Pharmacie+Abouzaid+Tiznit"
+},
+
+{
+name:"Pharmacie Centrale",
+address:"وسط مدينة تيزنيت",
+phone:"0528860000",
+map:"https://www.google.com/maps/search/?api=1&query=Pharmacie+Centrale+Tiznit"
+},
+
+{
+name:"Pharmacie Atlas",
+address:"حي المسيرة - تيزنيت",
+phone:"0528861111",
+map:"https://www.google.com/maps/search/?api=1&query=Pharmacie+Atlas+Tiznit"
+}
+
+];
+
+function displayPharmacies(list){
+
+const container=document.getElementById("pharmacyList");
+
+container.innerHTML="";
+
+list.forEach(p=>{
+
+container.innerHTML+=`
+
+<div class="pharmacy">
+
+<div class="name">${p.name}</div>
+
+<div class="address">${p.address}</div>
+
+<div class="phone">📞 ${p.phone}</div>
+
+<div class="buttons">
+
+<a href="tel:${p.phone}">
+<button class="call">اتصال</button>
+</a>
+
+<a href="${p.map}" target="_blank">
+<button class="map">الخريطة</button>
+</a>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+displayPharmacies(pharmacies);
+
+document.getElementById("searchInput").addEventListener("keyup", function(){
+
+let value=this.value.toLowerCase();
+
+let filtered=pharmacies.filter(p=>
+
+p.name.toLowerCase().includes(value) ||
+p.address.toLowerCase().includes(value)
+
+);
+
+displayPharmacies(filtered);
+
+});
+
+</script>
+
+</body>
+</html>
